@@ -53,9 +53,10 @@ while True:
             mnx, mny = test_image.shape
             test_image = test_image.reshape((mnx*mny))
             
-            image = cv2.putText(image, ANSWERS[clf.predict([test_image])[0]], (x + 38,y + 38), cv2.FONT_HERSHEY_PLAIN, 1.2, (0, 0, 0))
-            image = cv2.putText(image, ANSWERS[clf.predict([test_image])[0]], (x + 37,y + 37), cv2.FONT_HERSHEY_PLAIN, 1.2, (row * 40, column * 40, 255))
-            #image = cv2.rectangle(image, (x, y), (dx, dy), (row * 50, 0, 0), 2)
+            prediction = ANSWERS[clf.predict([test_image])[0]]
+            image = cv2.putText(image, prediction, (x + 38,y + 38), cv2.FONT_HERSHEY_PLAIN, 1.2, (0, 0, 0))
+            image = cv2.putText(image, prediction, (x + 37,y + 37), cv2.FONT_HERSHEY_PLAIN, 1.2, (row * 40, column * 40, 255))
+            image = cv2.rectangle(image, (x, y), (dx, dy), (255, 255, 255), 1)
     
     
     cv2.imshow("Screenshot", image)
