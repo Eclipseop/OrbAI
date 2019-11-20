@@ -48,7 +48,6 @@ while True:
             dy = y + 75
             
             test_image = image[y:dy, x:dx]
-            test_image = cv2.cvtColor(test_image, cv2.COLOR_BGR2GRAY)
             test_image = np.array(test_image)
             mnx, mny = test_image.shape
             test_image = test_image.reshape((mnx*mny))
@@ -60,4 +59,4 @@ while True:
     
     
     cv2.imshow("Screenshot", image)
-    cv2.waitKey(1)
+    cv2.waitKey(100)
