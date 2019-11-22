@@ -57,7 +57,6 @@ def generate_random_path(starting_index, number_of_moves):
 
 def follow_path(board_string, move_set):
     starting_index, moves = move_set
-    print(moves)
 
     last_index = starting_index
     pickup = board_string[starting_index]
@@ -68,11 +67,3 @@ def follow_path(board_string, move_set):
         last_index += amove.value
 
     return board_string
-
-
-if __name__ == "__main__":
-    string = "HHHHHLLLBDHLRLRDGBRLDGDHGLRHLG"
-
-    path = generate_random_path(5, 10)
-    new_board = ''.join(follow_path(string, path))
-    print(new_board)
