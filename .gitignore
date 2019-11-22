@@ -1,0 +1,5 @@
+*.ini
+data/*.png
+*.pickle
+__pycache__/*
+.vscode/*
