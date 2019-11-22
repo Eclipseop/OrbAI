@@ -1,8 +1,8 @@
 import pickle
-from sklearn.neighbors import KNeighborsClassifier
-import numpy as np
 import os
 import random
+from sklearn.neighbors import KNeighborsClassifier
+import numpy as np
 import cv2
 
 ANSWERS = ['R', 'G', 'B', 'L', 'D', 'H', 'J']
