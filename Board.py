@@ -1,5 +1,6 @@
 import App
 import move
+import random
 
 
 def on_board(index):
@@ -38,12 +39,40 @@ def count_matches(board_string):
     return matches
 
 
-def generate_random_path(starting_index, moves):
-    return "yeet", 123
+def generate_random_path(starting_index, number_of_moves):
+    path = []
+    last_move = random.choice(move.get_available_moves(starting_index))
+    index = starting_index
+
+    for i in range(number_of_moves):
+        move_set = list(filter(lambda x: x.value != (last_move.value * -1),
+                               move.get_available_moves(index)))
+        amove = random.choice(move_set)
+        path.append(amove)
+        last_move = amove
+        index += amove.value
+
+    return starting_index, path
+
+
+def follow_path(board_string, move_set):
+    starting_index, moves = move_set
+    print(moves)
+
+    last_index = starting_index
+    pickup = board_string[starting_index]
+    board_string = list(board_string)
+    for amove in moves:
+        board_string[last_index] = board_string[last_index + amove.value]
+        board_string[last_index + amove.value] = pickup
+        last_index += amove.value
+
+    return board_string
 
 
 if __name__ == "__main__":
-    #print(count_matches("HHHHHLLLBDHLRLRDGBRLDGDHGLRHLG"))
-    word, num = generate_random_path(1, 1)
-    print(word)
-    print(num)
+    string = "HHHHHLLLBDHLRLRDGBRLDGDHGLRHLG"
+
+    path = generate_random_path(5, 10)
+    new_board = ''.join(follow_path(string, path))
+    print(new_board)
