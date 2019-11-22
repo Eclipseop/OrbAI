@@ -7,6 +7,7 @@ import cv2
 
 ANSWERS = ['R', 'G', 'B', 'L', 'D', 'H', 'J']
 
+
 def generate_model():
     data = os.listdir("data")
     random.shuffle(data)
@@ -19,7 +20,7 @@ def generate_model():
 
     training_data = np.array(training_data)
     nsamples, nx, ny = training_data.shape
-    training_data = training_data.reshape((nsamples,nx*ny))
+    training_data = training_data.reshape((nsamples, nx*ny))
 
     training_data, testing_data = np.array_split(training_data, 2)
     training_answer, testing_answer = np.array_split(training_answer, 2)
@@ -30,6 +31,7 @@ def generate_model():
 
     pickle.dump(clf, open('model.pickle', 'wb'))
     return clf
+
 
 if __name__ == "__main__":
     generate_model()

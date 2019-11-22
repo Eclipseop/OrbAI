@@ -5,19 +5,22 @@ import cv2
 import Train
 
 ANSWERS = ['R', 'G', 'B', 'L', 'D', 'H', 'J']
-model = None
 
 
-def load_model():
-    global model
+def get_model():
+    model = None
     try:
         model = pickle.load(open('model.pickle', 'rb'))
     except FileNotFoundError:
         print('Model not found, creating a new one...')
         model = Train.generate_model()
 
+    return model
 
-def main():
+
+def get_orb_images():
+    images = []
+
     image = pyautogui.screenshot()
     image = np.array(image)
     x = 733
@@ -39,8 +42,37 @@ def main():
             orb_image = np.array(orb_image)
             mnx, mny = orb_image.shape
             orb_image = orb_image.reshape((mnx*mny))
+            images.append(orb_image)
 
-            prediction = ANSWERS[model.predict([orb_image])[0]]
+    return images
+
+
+def generate_board_string():
+    board_string = ""
+    for image in get_orb_images():
+        board_string += ANSWERS[get_model().predict([image])[0]]
+    return board_string
+
+
+def debug_window():
+    image = pyautogui.screenshot()
+    image = np.array(image)
+    x = 733
+    y = 588
+    h = 377
+    w = 452
+    image = image[:, :, ::-1].copy()
+    image = image[y:y+h, x:x+w]
+
+    board_string = generate_board_string()
+    for row in range(0, 5):
+        for column in range(0, 6):
+            x = (76 * column) - column
+            y = (76 * row) - row
+            dx = x + 75
+            dy = y + 75
+
+            prediction = board_string[row * 6 + column]
             image = cv2.putText(image, prediction, (x + 38, y + 38),
                                 cv2.FONT_HERSHEY_PLAIN, 1.2, (0, 0, 0))
             image = cv2.putText(image, prediction, (x + 37, y + 37),
@@ -52,6 +84,5 @@ def main():
 
 
 if __name__ == "__main__":
-    load_model()
     while True:
-        main()
+        debug_window()
