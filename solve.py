@@ -1,6 +1,6 @@
-import App
 import random
-import Board
+import app
+import board
 
 
 def get_best_moveset(board_string, iterations, min, max):
@@ -9,11 +9,11 @@ def get_best_moveset(board_string, iterations, min, max):
     min_moves = 100
 
     for i in range(iterations):
-        rand_path = Board.generate_random_path(
+        rand_path = board.generate_random_path(
             random.randint(0, 29), random.randint(min, max))
-        followed_path = Board.follow_path(board_string, rand_path)
+        followed_path = board.follow_path(board_string, rand_path)
 
-        combo = Board.count_matches(followed_path)
+        combo = board.count_matches(followed_path)
         moves = len(followed_path[1])
         if combo >= max_combo:
             print(f"Moves: {moves}, Combos: {combo}")
@@ -25,7 +25,7 @@ def get_best_moveset(board_string, iterations, min, max):
 
 
 def solve():
-    board_string = App.generate_board_string()
+    board_string = app.generate_board_string()
     move_set = get_best_moveset(board_string, 1000, 5, 40)
 
     print(move_set)

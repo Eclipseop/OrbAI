@@ -2,7 +2,7 @@ import pickle
 import numpy as np
 import pyautogui
 import cv2
-import Train
+import train
 
 ANSWERS = ['R', 'G', 'B', 'L', 'D', 'H', 'J']
 
@@ -13,7 +13,7 @@ def get_model():
         model = pickle.load(open('model.pickle', 'rb'))
     except FileNotFoundError:
         print('Model not found, creating a new one...')
-        model = Train.generate_model()
+        model = train.generate_model()
 
     return model
 

@@ -1,6 +1,5 @@
-import App
-import move
 import random
+import move
 
 
 def on_board(index):
