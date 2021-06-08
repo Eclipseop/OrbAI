@@ -8,7 +8,7 @@ mccabe==0.6.1
 MouseInfo==0.1.2
 numpy==1.17.4
 opencv-python==4.1.2.30
-Pillow==8.1.1
+Pillow==8.2.0
 PyAutoGUI==0.9.48
 pycodestyle==2.5.0
 PyGetWindow==0.0.8
